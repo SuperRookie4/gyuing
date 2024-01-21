@@ -10,6 +10,19 @@ public class HomeExam {
 	public String mainPageUrl;
 	public HomeExam(HttpServletRequest request){
 		
+
+		String category = "story";	
+		if(request.getParameter("category")!=null) {
+			category = request.getParameter("category");
+		}
+		String categoryUrl =  "menu/"+category+".jsp";
+			
+		String mainPage = "intro";
+		if(request.getParameter("main")!=null) {
+			mainPage = request.getParameter("main");
+		}
+		mainPageUrl = category+"/"+mainPage+".jsp";
+		
 		HashMap<String, ArrayList<Menu>> menuMap = new HashMap();
 		
 		//각 카테고리별 목록
@@ -39,21 +52,6 @@ public class HomeExam {
 		menuMap.put("product", product);
 		menuMap.put("event", event);
 		
-	
-		String category = request.getParameter("category");
-		if(category!=null) {
-			request.setAttribute("menus", menuMap.get(category));
-			//category = request.getParameter(category);
-		}
-		String categoryUrl =  "menu/"+category+".jsp";
-			
-		
-		String mainPage = request.getParameter("main");
-		if(mainPage!=null) {
-			request.setAttribute("menus", menuMap.get(mainPage));
-			//mainPage = request.getParameter(mainPage);
-		}
-		mainPageUrl = category+"/"+mainPage+".jsp";
-		
+		request.setAttribute("menus", menuMap.get(category));
 	}
 }
