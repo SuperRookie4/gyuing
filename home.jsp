@@ -32,6 +32,7 @@
 	}
 	.beige{
 		background-color: #f7f0da;
+		color: #000;
 	}
 </style>
 </head>
